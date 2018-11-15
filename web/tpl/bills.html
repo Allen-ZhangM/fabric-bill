@@ -1,0 +1,46 @@
+<html>
+<head>
+    <title>持有票据列表</title>
+</head>
+<body>
+
+当前登录用户: {{.CurrentUser.Acct}}<br/><br/>
+
+<div>
+    <a href="/addBill">发布票据</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="/bills">我的票据</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+
+<table>
+    <tr>
+        <th>票据号码</th>
+        <th>票据状态</th>
+        <th>所属关系</th>
+        <th>操作</th>
+    </tr>
+
+    {{range .Bills}}
+        <tr>
+            <td>{{.BillInfoID}}</td>
+            <td>
+                {{if eq .State "NewPublish"}}
+                    新发布
+                {{else if eq .State "EndorseWaitSign"}}}
+                        待背书
+                {{else if eq .State "EndorseSigned"}}}
+                        背书签收
+                {{else if eq .State "EndorseReject"}}
+                        背书拒绝
+                {{end}}
+            </td>
+            <td>
+                {{.HoldrAcct}}持有
+            </td>
+            <td>
+                <a href="/billInfo?billNo={{.BillInfoID}}">详情</a>
+            </td>
+        </tr>
+    {{end}}
+</table>
+</body>
+</html>

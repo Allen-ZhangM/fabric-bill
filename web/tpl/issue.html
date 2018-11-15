@@ -1,0 +1,46 @@
+<html>
+<head>
+    <title>发布票据页面</title>
+</head>
+<body>
+
+当前登录用户: {{.CurrentUser.Acct}}<br/><br/>
+
+<div>
+    <a href="/addBill">发布票据</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="/bills">我的票据</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+
+{{if .Flag}}
+<div>
+    {{.Msg}}<br/><br/>
+</div>
+{{end}}
+
+<div>
+    <form action="/issue" method="post">
+        票据号码: <input type="text" name="billInfoID" placeholder="POC1001"/><br/>
+        票据金额: <input type="text" name="billInfoAmt" placeholder="20000"/><br/>
+        票据类型: <input type="text" name="billInfoType" placeholder="111"/><br/>
+        出票日期: <input type="text" name="billInfoIsseDate" placeholder="20100101"/><br/>
+        到期日期: <input type="text" name="billInfoDueDate" placeholder="20100110"/><br/>
+
+        出票人名称: <input type="text" name="drwrAcct" placeholder="111"/><br/>
+        出票人证件号码: <input type="text" name="drwrCmID" placeholder="111"/><br/>
+
+        承兑人名称: <input type="text" name="accptrAcct" placeholder="111"/><br/>
+        承兑人证件号码: <input type="text" name="accptrCmID" placeholder="111"/><br/>
+
+        收款人名称: <input type="text" name="pyeeAcct" placeholder="111"/><br/>
+        收款人证件号码: <input type="text" name="pyeeCmID" placeholder="111"/><br/>
+
+        持票人名称: <input type="text" name="holdrAcct" value="{{.CurrentUser.Acct}}" placeholder="{{.CurrentUser.Acct}}"/><br/>
+        持票人证件号码: <input type="text" name="holdrCmID" value="{{.CurrentUser.CmID}}" placeholder="{{.CurrentUser.CmID}}"/><br/>
+
+        <input type="submit" value="发布"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="reset" value="重置"/>
+    </form>
+</div>
+
+</body>
+</html>
